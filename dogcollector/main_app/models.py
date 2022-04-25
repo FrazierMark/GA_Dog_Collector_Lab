@@ -8,3 +8,4 @@ class Dog(models.Model):
 	breed = models.CharField(max_length=100)
 	description = models.CharField(max_length=250)
 	age = models.IntegerField()
+
