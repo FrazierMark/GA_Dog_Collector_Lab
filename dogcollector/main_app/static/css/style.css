@@ -10,6 +10,10 @@ body {
     
   }
   
+  div.nav-wrapper{
+      background-color: aqua;
+  }
+  
   footer.page-footer {
     padding-top: 0;
     text-align: right;
