@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.http import HttpResponse
 from .models import Dog
@@ -11,6 +11,7 @@ from .models import Dog
 class DogCreate(CreateView):
     model = Dog
     fields = '__all__'
+    success_url = '/dogs/'
 
 def home(request):
     return HttpResponse('<h1>Hello World!</>')
