@@ -17,3 +17,33 @@ class Dog(models.Model):
     #  w/ that dog_id that was just made
     def get_absolute_url(self):
         return reverse('detail', kwargs={'dog_id': self.id})
+
+
+# A tuple of 2-tuples
+# B will be the value, so this what we'll store in the db
+# Breakfast is the user friendlyu view, so what you see when you use a dropdown
+MEALS = (
+    ('B', 'Breakfast'),
+    ('L', 'Lunch'),
+    ('D', 'Dinner')
+)
+
+
+class Feeding(models.Model):
+  date = models.DateField()
+  meal = models.CharField(
+      max_length=1,
+      # add the 'choices' field option
+      choices=MEALS,
+      # set the default value for meal to be 'B'
+      default=MEALS[0][0]
+  )
+
+  # the foregin key always goes on the many side
+  # internally it will be cat_id the _id automatically gets added
+  dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
+
+  def __str__(self):
+      # is method will give us friendly value of a Field.choice
+      # django built-in method for easy display...
+      return f"{self.get_meal_display()} on {self.date}"
