@@ -42,11 +42,17 @@ def dogs_index(request):
 
 # (from urls) path('dogs/<int:dog_id>/' <-- this is where dog_id comes from
 def dogs_detail(request, dog_id):
-    dog = Dog.objects.get(id=dog_id)
-    # create an instance of FeedingForm
-    feeding_form = FeedingForm()
-    return render(request, 'dogs/detail.html', {'dog': dog, 'feeding_form': feeding_form})
-
+  dog = Dog.objects.get(id=dog_id)
+  # Get the toys the dog doesn't have
+  toys_dog_doesnt_have = Toy.objects.exclude(id__in = dog.toys.all().values_list('id'))
+  # Instantiate FeedingForm to be rendered in the template
+  feeding_form = FeedingForm()
+  return render(request, 'dogs/detail.html', {
+    # Pass the dog and feeding_form as context
+    'dog': dog, 'feeding_form': feeding_form,
+    # Add the toys to be displayed
+    'toys': toys_dog_doesnt_have
+  })
 
 def add_feeding(request, dog_id):
   # create a ModelForm instance using the data in request.POST
