@@ -29,21 +29,39 @@ MEALS = (
 )
 
 
-class Feeding(models.Model):
-  date = models.DateField()
-  meal = models.CharField(
-      max_length=1,
-      # add the 'choices' field option
-      choices=MEALS,
-      # set the default value for meal to be 'B'
-      default=MEALS[0][0]
-  )
-
-  # the foregin key always goes on the many side
-  # internally it will be cat_id the _id automatically gets added
-  dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
+class Toy(models.Model):
+  name = models.CharField(max_length=50)
+  color = models.CharField(max_length=20)
 
   def __str__(self):
-      # is method will give us friendly value of a Field.choice
-      # django built-in method for easy display...
-      return f"{self.get_meal_display()} on {self.date}"
+    return self.name
+
+ # once POST request is made, this redirects client to detail page
+    #  w/ that dog_id that was just made
+  def get_absolute_url(self):
+    return reverse('toys_detail', kwargs={'pk': self.id})
+
+
+class Feeding(models.Model):
+    date = models.DateField()
+    meal = models.CharField(
+        max_length=1,
+        # add the 'choices' field option
+        choices=MEALS,
+        # set the default value for meal to be 'B'
+        default=MEALS[0][0]
+  )
+
+    # the foregin key always goes on the many side
+    # internally it will be cat_id the _id automatically gets added
+    dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
+
+    def __str__(self):
+        # is method will give us friendly value of a Field.choice
+        # # django built-in method for easy display...
+        return f"{self.get_meal_display()} on {self.date}"
+
+    # change the defaul sort
+
+    class Meta:
+        ordering = ['-date']
