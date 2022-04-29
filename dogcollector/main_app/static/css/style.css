@@ -1,9 +1,26 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
 
-body {
+html,
+body
+{
+    overflow: hidden;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-  }
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
   
   main {
     flex: 1 0 auto;

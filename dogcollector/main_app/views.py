@@ -28,7 +28,7 @@ class DogDelete(DeleteView):
 
 
 def home(request):
-    return HttpResponse('<h1>Hello World!</>')
+    return render(request, 'three.html')
 
 
 def about(request):
