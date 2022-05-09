@@ -28,6 +28,13 @@
     </nav>
   </header>
   <main class="container">
+
+    {% load transpile %}
+
+    <script type="import" src="{% static "js/three/examples/jsm/controls/OrbitControls.mjs" %}"></script>
+    <script type="import" src="{% static "js/three" %}"></script>
+    <script type="text/javascript" src="{% static "js/3.mjs" %}"></script>
+
     {% block content %}
     {% endblock %}
   </main>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'npm_mjs',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PROJECT_PATH = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+    os.path.join(PROJECT_PATH, 'static-transpile'),
+)
+
+STATIC_URL = '/static/'
+
+SETTINGS_PATHS = [os.path.dirname(__file__), ]
